@@ -4,8 +4,11 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.common.by import By
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
 
 class SeleniumDriver:
     def __init__(self):
@@ -67,10 +70,16 @@ def check_login():
     # Assuming `driver` is your WebDriver instance
     browser = driver.get_browser()
     try:
-        logo_img = browser.find_element_by_css_selector('img.logo[alt="University of Technology Sydney logo"]')
+        # Use the find_element method with the By.CSS_SELECTOR locator
+        logo_img = browser.find_element(By.CSS_SELECTOR, 'img.logo[alt="University of Technology Sydney logo"]')
+        print("you are logged in")
         return {"status": "you are logged in"}, 200
-    except:    
+    except Exception as e: 
+        print(f"Error occurred: {e}")
+        print("you are not logged in - please login")
         return {"status": "you are not logged in - please login"}, 200
+
+
 
 
 if __name__ == "__main__":

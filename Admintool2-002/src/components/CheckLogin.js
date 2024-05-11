@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 
 function CheckLogin() {
   const [statusCheck, setStatusCheck] = useState('');
@@ -7,14 +7,13 @@ function CheckLogin() {
 
   const checkLoginStatus = async () => {
     setLoadingCheck(true);
-    try {
-      const result = await axios.post('http://localhost:5000/check_login');
-      setStatusCheck(result.data.status);
-    } catch (error) {
-      console.error("Error: ", error.response ? error.response.data : error);
-      setStatusCheck(`Error: ${error.message}`);
-    }
-    setLoadingCheck(false);
+    const response = await fetch('http://localhost:5000/check_login', {
+      method: 'POST',
+      timeout: 5000
+    });
+    const data = await response.json();
+    setStatusCheck(data.status);
+      setLoadingCheck(false);
   };
 
   return (
@@ -28,3 +27,16 @@ function CheckLogin() {
 }
 
 export default CheckLogin;
+
+
+// const checkLoginStatus = async () => {
+//   setLoadingCheck(true);
+//   try {
+//     const result = await axios.post('http://localhost:5000/check_login',{timeout: 5000});
+//     setStatusCheck(result.data.status);
+//   } catch (error) {
+//     console.error("Error: ", error.response ? error.response.data : error);
+//     setStatusCheck(`Error: ${error}`);
+//   }
+//   setLoadingCheck(false);
+// };

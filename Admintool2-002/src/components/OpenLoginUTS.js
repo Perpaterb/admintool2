@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 
 function OpenLoginUTS() {
   const [statusOpen, setStatusOpen] = useState('');
@@ -8,21 +8,26 @@ function OpenLoginUTS() {
   const handleOpenAlert = async () => {
     setLoadingOpen(true);
     try {
-      const result = await axios.post('http://localhost:5000/open_or_alert');
-      setStatusOpen(result.data.status);
+      const response = await fetch('http://localhost:5000/open_or_alert', {
+        method: 'POST',
+        timeout: 5000
+      });
+      console.log("open or alert result", response);
+  
+      const data = await response.json();
+      setStatusOpen(data.status);
     } catch (error) {
       console.error("Error: ", error.response ? error.response.data : error);
-      setStatusOpen(`Error: ${error.message}`);
+      setStatusOpen(`Error: ${error}`);
     }
     setLoadingOpen(false);
-  }; 
+  };
 
   return (
     <div className="App">
       <button onClick={handleOpenAlert} disabled={loadingOpen}>
         {loadingOpen ? 'Loading...' : 'Open or Alert'}
       </button>
-      <p>{statusOpen}</p>
     </div>
   );
 }
