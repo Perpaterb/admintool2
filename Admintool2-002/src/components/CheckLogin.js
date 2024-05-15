@@ -17,8 +17,8 @@ function CheckLogin() {
   };
 
   return (
-    <div className="App">
-      <button onClick={checkLoginStatus} disabled={loadingCheck}>
+    <div className="CheckLogin">
+      <button onClick={checkLoginStatus} isabled={loadingCheck}>
         {loadingCheck ? 'Loading...' : 'Check Login'}
       </button>
       <p>{statusCheck}</p>

@@ -1,6 +1,7 @@
 import OpenLoginUTS from './components/OpenLoginUTS'
 import CheckLogin from './components/CheckLogin'
 import LoginComponent from './components/LoginComponent'
+import OpenSP from './components/OpenSP'
 
 function App() {
   return (
@@ -8,6 +9,7 @@ function App() {
       <OpenLoginUTS/>
       <CheckLogin/>
       <LoginComponent/>
+      <OpenSP/>
     </div>
   )
 }

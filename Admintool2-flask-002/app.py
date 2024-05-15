@@ -10,6 +10,7 @@ from functions.check_login import check_login
 from functions.force_close import force_close
 from functions.open_or_alert import open_or_alert
 from functions.login import login
+from functions.open_sp import open_sp
 from flask import g
 
 app = Flask(__name__)
@@ -40,6 +41,7 @@ app.register_blueprint(check_login)
 app.register_blueprint(force_close)
 app.register_blueprint(open_or_alert)
 app.register_blueprint(login)
+app.register_blueprint(open_sp)
 
 @app.route('/close', methods=['POST'])
 def close_browser_session():

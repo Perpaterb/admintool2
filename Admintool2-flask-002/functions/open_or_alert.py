@@ -9,6 +9,7 @@ def open_or_alert_func():
     try:
         url = 'https://login.uts.edu.au'
         browser = driver.get_browser()
+        browser.set_window_size(1024, 768)
         if browser and isinstance(url, str):
             if 'login.uts.edu.au' in browser.current_url:
                 browser.execute_script("alert('Here I am');")
